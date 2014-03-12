@@ -59,12 +59,26 @@ function createNewEntry($user, $content, $room) {
 	}
 }
 
+function notifyOnline($uid, $room){
+	$query = "SELECT * FROM users_in_rooms WHERE user ='".mysql_real_escape_string($uid)."' AND room ='".mysql_real_escape_string($room)."'";
+	$result = mysql_query($query);
+	if (mysql_num_rows($result) == 0) {
+		$query = "INSERT INTO users_in_rooms (user, room, time) VALUES ('".mysql_real_escape_string($uid)."', '".mysql_real_escape_string($room)."', '".time()."')";
+		$result = mysql_query($query);
+	}
+	$query = "UPDATE users_in_rooms Set time = '".time()."' WHERE user ='".mysql_real_escape_string($uid)."' AND room ='".mysql_real_escape_string($room)."'";
+	$result = mysql_query($query) or die(mysql_error());
+}
+
 // Aktion festlegen
 if ($_GET['action'] == "createNewEntry") { 
 	createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
 }
 elseif ($_GET['action'] == "getLatestEntries") {
 	getLatestEntries($_GET['latestID'], $_GET['room']);
+}
+elseif ($_GET['action'] == "notifyOnline") {
+	notifyOnline($_GET['uid'], $_GET['room']);
 }
 
 mysql_close();

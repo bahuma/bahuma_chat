@@ -1,4 +1,5 @@
 var latestid = 0;
+var onpage = true;
 
 function htmlEncode(value){
     if (value) {
@@ -15,6 +16,13 @@ function getLatestEntries() {
 				jQuery("#chatwindow").prepend('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ el.user.displayname + '</span>: <span class="content">'+ el.content +'</span></div>');
 			});
 			latestid = data.latest;
+			
+			if (!onpage) {
+				document.title = "(!) Bahuma Chat";
+			}
+			else {
+				document.title = "Bahuma Chat";
+			}
 		}	
 	});	
 }
@@ -23,9 +31,22 @@ function createNewEntry(content) {
 	jQuery.getJSON("chatcontroller.php?action=createNewEntry&content=" + htmlEncode(content) + "&user="+ USER +"&room=default");
 }
 
+function notifyOnline() {
+	jQuery.getJSON("chatcontroller.php?action=notifyOnline&uid="+ USER +"&room=default");
+}
+
 jQuery(document).ready(function ($) {
+	$([window, document]).focusin(function(){
+    	onpage = true;
+   	}).focusout(function(){
+      	onpage = false;
+   	});
+	
 	getLatestEntries();	
 	setInterval("getLatestEntries()", 1000);
+	
+	notifyOnline();
+	setInterval("notifyOnline()", 10000);
 
   	jQuery('#chatform').on('submit', function(e){
     	e.preventDefault();
