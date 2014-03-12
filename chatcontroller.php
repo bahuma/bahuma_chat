@@ -21,7 +21,7 @@ function getLatestEntries($latestID, $room) {
 		);
 	}
 	
-	print json_decode($messages);	
+	print json_encode($messages);	
 }
 
 function createNewEntry($user, $content, $room) {
