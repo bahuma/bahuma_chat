@@ -12,6 +12,8 @@ if (!isset($_SESSION['user'])) {
 	<head>
 		<title>Bahuma Chat</title>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="css/style.css">
