@@ -1,8 +1,12 @@
 <?php
-include("database.php");
 session_start();
+include("database.php");
 
-if (!isset($_SESSION['uid'])) {
+print"<pre";
+print_r($_SESSION);
+print"</pre>";
+
+if (!isset($_SESSION['user'])) {
 	die ("ERROR: NOT LOGGED IN");
 }
 ?>
