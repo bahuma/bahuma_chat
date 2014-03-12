@@ -2,10 +2,6 @@
 session_start();
 include("database.php");
 
-print"<pre";
-print_r($_SESSION);
-print"</pre>";
-
 if (!isset($_SESSION['user'])) {
 	die ("ERROR: NOT LOGGED IN");
 }
@@ -21,7 +17,7 @@ if (!isset($_SESSION['user'])) {
 		
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<script src="js/frontpage.js"></script>
+		<script src="js/chat.js"></script>
 	<head>
 	<body>
 		<div class="container">
