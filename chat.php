@@ -49,8 +49,7 @@ if (!isset($_SESSION['user'])) {
 				<div class="col-md-3">
 					<aside class="users">
 						<h4>User im Chat</h4>
-						<ul>
-							<li></li>
+						<ul id="userlist">
 						</ul>
 					</aside>
 				</div>

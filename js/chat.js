@@ -35,6 +35,17 @@ function notifyOnline() {
 	jQuery.getJSON("chatcontroller.php?action=notifyOnline&uid="+ USER +"&room=default");
 }
 
+function getOnlineUsers() {
+	jQuery.getJSON("chatcontroller.php?action=getOnlineUsers&room=default", function (data) {
+		if (data.length > 0) {
+			jQuery("#userlist").empty();
+			jQuery.each(data, function (i, el) {
+				jQuery("#userlist").append('<li style="color: '+el.color+'">'+ el.displayname + '</li>');
+			});
+		}
+	});
+}
+
 jQuery(document).ready(function ($) {
 	$([window, document]).focusin(function(){
     	onpage = true;
@@ -47,7 +58,10 @@ jQuery(document).ready(function ($) {
 	
 	notifyOnline();
 	setInterval("notifyOnline()", 10000);
-
+	
+	getOnlineUsers();
+	setInterval("getOnlineUsers()", 10000);
+	
   	jQuery('#chatform').on('submit', function(e){
     	e.preventDefault();
     	createNewEntry(jQuery('#content').val());

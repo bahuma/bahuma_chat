@@ -20,7 +20,7 @@ function getLatestEntries($latestID, $room) {
 		$messages[] = array (
 			"id" => $row['id'],
 			"user" => array(
-				"id" => $user['id'],
+				"id" => $user['uid'],
 				"name" => $user['name'],
 				"displayname" => $user['displayname'],
 				"color" => $user['color']
@@ -70,6 +70,27 @@ function notifyOnline($uid, $room){
 	$result = mysql_query($query) or die(mysql_error());
 }
 
+function getOnlineUsers($room) {
+	$requiredtime = time() - 20;
+	
+	$query = "SELECT * FROM users_in_rooms WHERE room='".mysql_real_escape_string($room)."' AND time > '".$requiredtime."'";
+	$result = mysql_query($query) or die (mysql_error());
+	
+	$json = array();
+	while ($row = mysql_fetch_array($result)) {
+		$query2 = "SELECT uid, name, displayname, color FROM users WHERE uid ='".$row['user']."'";
+		$result2 = mysql_query($query2) or die(mysql_error());
+		$user = mysql_fetch_array($result2);
+		$json[] = array (
+			"id" => $user['uid'],
+			"name" => $user['name'],
+			"displayname" => $user['displayname'],
+			"color" => $user['color']
+		);
+	}
+	print json_encode($json);
+}
+
 // Aktion festlegen
 if ($_GET['action'] == "createNewEntry") { 
 	createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
@@ -79,6 +100,9 @@ elseif ($_GET['action'] == "getLatestEntries") {
 }
 elseif ($_GET['action'] == "notifyOnline") {
 	notifyOnline($_GET['uid'], $_GET['room']);
+}
+elseif ($_GET['action'] == "getOnlineUsers") {
+	getOnlineUsers($_GET['room']);
 }
 
 mysql_close();
