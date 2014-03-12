@@ -35,7 +35,7 @@ function createNewEntry($user, $content, $room) {
 	
 	if (!mysql_query($query)) {
 		//Fehlerkontrolle
-		print('{status: 0}');
+		print('{status: 0, message: "'.mysql_error().'"}');
 	}
 	else {
 		print('{status: 0}');
