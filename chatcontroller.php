@@ -1,25 +1,27 @@
 <?php
 header( "Cache-Control: no-cache, must-revalidate" ); 
 header( "Pragma: no-cache" );
-header("Content-Type: text/xml");
+header("Content-Type: text/json");
 
 include("database.php");
 
 function getLatestEntries($latestID, $room) {
 	
 	$query = "SELECT id, user, content, time FROM chatroom_".mysql_real_escape_string($room)." WHERE id > ".mysql_real_escape_string($latestID)." ORDER BY id DESC LIMIT 20"; 
-	$result = mysql_query($query); 
-	echo "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
-	echo "<messages>";
-	while($row=mysql_fetch_array($result)) { 
-		echo "<message><id>".$row['id'];
-		echo "</id><user>".$row['user'];
-		echo "</user><content>".$row['content'];
-		//Formatierung des Timestamps
-		echo "</content><time>".date("d.m.Y H:i",$row['time']); 
-		echo "</time></message>";
+	$result = mysql_query($query);
+	
+	$messages = array();
+	
+	while($row=mysql_fetch_array($result)) {
+		$messages[] = array (
+			"id" => $row['id'],
+			"user" => $row['user'],
+			"content" => $row['content'],
+			"time" => date("d.m.Y H:i",$row['time'])
+		);
 	}
-	echo "</messages>";
+	
+	print json_decode($messages);	
 }
 
 function createNewEntry($user, $content, $room) {
@@ -30,12 +32,13 @@ function createNewEntry($user, $content, $room) {
 	
 	$query = "INSERT INTO chatroom_".mysql_real_escape_string($room)." (user, content) 
 	VALUES ('".mysql_real_escape_string($user)."','".mysql_real_escape_string($content)."')";
-	echo "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>";
+	
 	if (!mysql_query($query)) {
 		//Fehlerkontrolle
-		echo "<createNewEntry>0</createNewEntry>";}
+		print('{status: 0}');
+	}
 	else {
-		echo "<createNewEntry>1</createNewEntry>";
+		print('{status: 0}');
 	}
 }
 
