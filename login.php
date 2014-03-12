@@ -55,6 +55,7 @@
 				foreach ($errors as $error) {
 					print '<div class="alert alert-danger">'.$error.'</div>';
 				}
+				print '<a href="impressum.html"><button type="button" class="btn btn-primary btn-lg btn-block">Zurück</button></a>';
 			}
 			else
 			{
