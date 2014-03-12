@@ -14,7 +14,7 @@
 		$username = mysql_real_escape_string($_POST['username']);
 		$password = mysql_real_escape_string($_POST['password']);
 		
-		$result = mysql_query ("SELECT * FROM users WHERE username = '$username'");
+		$result = mysql_query ("SELECT * FROM users WHERE username = '$username'") or die(mysql_error());
 		
 		if (mysql_num_rows($result) == 0) {
 			$errors[] = "Der angegebene Benutzer ist nicht vorhanden!";
