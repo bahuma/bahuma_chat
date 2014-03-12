@@ -7,39 +7,82 @@
 		
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="libs/bootstrapformhelpers/2.3.0/css/bootstrap-formhelpers.min.css">
+		<link rel="stylesheet" href="css/style.css">
 		
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="libs/bootstrapformhelpers/2.3.0/js/bootstrap-formhelpers.min.js"></script>
 		<script src="js/frontpage.js"></script>
 	<head>
 	<body>
 		<div class="container">
-			<section class="intro">
+			<section id="intro">
 				<div class="jumbotron">
 					<h1>Bahuma Chat!</h1>
 					<p>A simple web based Chat</p>
-					<p><a class="btn btn-primary btn-lg" id="loginbutton" role="button">Login</a></p>
+					<p>
+						<a class="btn btn-primary btn-lg loginbutton" role="button">Login</a>
+						<a class="btn btn-default btn-lg registerbutton" role="button">Registrieren</a>
+					</p>
 				</div>
 			</section>
-			<section class="login-form" style="display: none">
+			<section id="page" style="display: none">
 				<header class="page-header">
-					<h1>Login</h1>
-				</header>			
-				<form class="form-horizontal" action="login.php" method="post">
-					<div class="form-group">
-						<label for="username" class="col-sm-2 control-label">Username:</label>
-						<div class="col-sm-10">
-							<input type="text" name="username" class="form-control">
-						</div>
+					<ul class="nav nav-pills pull-right">
+						<li><a href="#login-form" data-toggle="pill" id="test2">Login</a></li>
+						<li><a href="#register-form" data-toggle="pill" id="test">Registrieren</a></li>
+					</ul>
+					<h1>Title</h1>
+				</header>
+				<div class="tab-content">
+					<div class="tab-pane fade" id="login-form">			
+						<form class="form-horizontal" action="login.php" method="post">
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">Username:</label>
+								<div class="col-sm-10">
+									<input type="text" name="username" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-2 control-label">Passwort:</label>
+								<div class="col-sm-10">
+									<input type="password" name="password" class="form-control">
+								</div>
+							</div>
+							<input type="submit" class="btn btn-default btn-primary btn-sm pull-right" value="Login">
+						</form>
 					</div>
-					<div class="form-group">
-						<label for="password" class="col-sm-2 control-label">Password:</label>
-						<div class="col-sm-10">
-							<input type="password" name="password" class="form-control">
-						</div>
+					<div class="tab-pane fade" id="register-form">
+						<form class="form-horizontal" action="register.php" method="post">
+							<div class="form-group">
+								<label for="username" class="col-sm-2 control-label">Username:</label>
+								<div class="col-sm-10">
+									<input type="text" name="username" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="password" class="col-sm-2 control-label">Passwort:</label>
+								<div class="col-sm-10">
+									<input type="password" name="password" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="displayname" class="col-sm-2 control-label">Angezeigter Name:</label>
+								<div class="col-sm-10">
+									<input type="text" name="displayname" class="form-control">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="color" class="col-sm-2 control-label">Angezeigter Name:</label>
+								<div class="col-sm-10">
+									<div class="bfh-colorpicker" data-name="color" data-color="#FF0000"></div>
+								</div>
+							</div>
+							<input type="submit" class="btn btn-default btn-primary btn-sm pull-right" value="Registrieren">
+						</form>
 					</div>
-					<input type="submit" class="btn btn-default btn-primary btn-sm pull-right" value="Login">
-				</form>
+				</div>
 			</section>
 		</div>
 	</body>
