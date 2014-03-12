@@ -5,7 +5,7 @@ function getLatestEntries() {
 		
 		if (data.length > 0) {
 			jQuery.each(data, function (i, el) {
-				jQuery("#chatwindow").append('<div class="message"><div class="time">'+ el.time +'</div><div class="author">'+ el.user + '</div><div class="content">'+ el.content+'</div></div>');
+				jQuery("#chatwindow").append('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ el.user.displayname + '</span>: <span class="content">'+ el.content +'</span></div>');
 			});
 			latestid = data[0].id;
 		}	

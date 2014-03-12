@@ -13,9 +13,18 @@ function getLatestEntries($latestID, $room) {
 	$messages = array();
 	
 	while($row=mysql_fetch_array($result)) {
+		$query2 = "SELECT uid, name, displayname, color FROM users WHERE uid ='".$row['user']."'";
+		$result2 = mysql_query($query2) or die(mysql_error());
+		$user = mysql_fetch_array($result2);
+		
 		$messages[] = array (
 			"id" => $row['id'],
-			"user" => $row['user'],
+			"user" => array(
+				"id" => $user['id'],
+				"name" => $user['name'],
+				"displayname" => $user['displayname'],
+				"color" => $user['color']
+			),
 			"content" => $row['content'],
 			"time" => date("d.m.Y H:i",$row['time'])
 		);
