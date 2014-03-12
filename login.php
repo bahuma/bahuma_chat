@@ -23,7 +23,7 @@
 		if (count ($errors) == 0) {
 			$row = mysql_fetch_object($result);
 			
-			if (md5($password) != $row->$password)
+			if (md5($password) != $row->password)
 				$errors[] = "Das eingegebene Passwort passt nicht zum angegebenen Benutzer!";
 				
 			if (count ($errors) == 0) {
