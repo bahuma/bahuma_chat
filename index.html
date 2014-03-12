@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 	<head>
 		<title>Bahuma Chat</title>
@@ -5,15 +6,23 @@
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 		
-		<script src="libs/jquery/2.1.0/jquery.min.js"></script>
+		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="js/frontpage.js"></script>
 	<head>
 	<body>
 		<div class="container">
-			<header>
-				<h1>Bahuma Chat</h1>
-			</header>
-			<section>
+			<section class="intro">
+				<div class="jumbotron">
+					<h1>Bahuma Chat!</h1>
+					<p>A simple web based Chat</p>
+					<p><a class="btn btn-primary btn-lg" id="loginbutton" role="button">Login</a></p>
+				</div>
+			</section>
+			<section class="login-form" style="display: none">
+				<header class="page-header">
+					<h1>Login</h1>
+				</header>			
 				<form class="form-horizontal" action="login.php" method="post">
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">Username:</label>
