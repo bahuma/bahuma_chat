@@ -26,11 +26,16 @@ function getLatestEntries($latestID, $room) {
 				"color" => $user['color']
 			),
 			"content" => $row['content'],
-			"time" => date("d.m.Y H:i",$row['time'])
+			"time" => date("d.m.Y H:i", $row['time'])
+		);
+		
+		$json = array(
+			"status" => 1,
+			"messages" => array_reverse($messages)
 		);
 	}
 	
-	print json_encode($messages);	
+	print json_encode($json);	
 }
 
 function createNewEntry($user, $content, $room) {

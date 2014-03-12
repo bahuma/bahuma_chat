@@ -35,14 +35,16 @@ if (!isset($_SESSION['user'])) {
 					</header>
 				</div>
 				<div class="col-md-9">
-					<div id="chatwindow"></div>
-					<div class="input">
-						<div class="form-group">
-							<label class="control-label" for="content"></label>
-							<input type="text" class="form-control" id="content" name="content">
+					<form>
+						<div class="input">
+							<div class="form-group">
+								<label class="control-label" for="content"></label>
+								<input type="text" class="form-control" id="content" name="content">
+							</div>
+							<button class="btn btn-default" id="sendenbutton">Senden</button>
 						</div>
-						<button class="btn btn-default" id="sendenbutton">Senden</button>
-					</div>
+					</form>
+					<div id="chatwindow"></div>
 				</div>
 				<div class="col-md-3">
 					<aside class="users">
