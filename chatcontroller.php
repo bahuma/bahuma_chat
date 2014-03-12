@@ -29,11 +29,14 @@ function getLatestEntries($latestID, $room) {
 			"time" => date("d.m.Y H:i", $row['time'])
 		);
 		
-		$json = array(
-			"status" => 1,
-			"messages" => array_reverse($messages)
-		);
+		$latest = $messages[0]['id'];
 	}
+	
+	$json = array(
+		"status" => 1,
+		"latest" => $latest,
+		"messages" => array_reverse($messages)
+	);
 	
 	print json_encode($json);	
 }
