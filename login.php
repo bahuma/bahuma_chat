@@ -25,13 +25,19 @@
 	<head>
 		<title>Login-Status</title>
 		<meta charset="utf-8">
+		
+		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		
+		<script src="libs/jquery/2.1.0/jquery.min.js"></script>
+		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<h1>Fehler</h1>
 			<?php
 			foreach ($errors as $error) {
-				print '<div class="message-error">'.$error.'</div>';
+				print '<div class="alert alert-danger">'.$error.'</div>';
 			}
 			?>
 		</div>
