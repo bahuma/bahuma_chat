@@ -14,6 +14,11 @@ if (!isset($_SESSION['user'])) {
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+		<script>
+			var USER = <?php print $_SESSION['user'] ?>
+		</script>
 		
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -29,6 +34,13 @@ if (!isset($_SESSION['user'])) {
 				</div>
 				<div class="col-md-9">
 					<div id="chatwindow"></div>
+					<div class="input">
+						<div class="form-group">
+							<label class="control-label" for="content"></label>
+							<input type="text" class="form-control" id="content" name="content">
+						</div>
+						<button class="btn btn-default" id="sendenbutton">Senden</button>
+					</div>
 				</div>
 				<div class="col-md-3">
 					<aside class="users">
