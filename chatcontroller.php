@@ -31,7 +31,7 @@ function createNewEntry($user, $content, $room) {
 	$nachricht = strip_tags($nachricht,''); 
 	
 	$query = "INSERT INTO chatroom_".mysql_real_escape_string($room)." (user, content) 
-	VALUES ('".mysql_real_escape_string($user)."','".mysql_real_escape_string($content)."')";
+	VALUES ('".mysql_real_escape_string($user)."','".mysql_real_escape_string($content)."','".time()."')";
 	
 	if (!mysql_query($query)) {
 		//Fehlerkontrolle
