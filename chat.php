@@ -28,6 +28,7 @@ if (!isset($_SESSION['user'])) {
 					</header>
 				</div>
 				<div class="col-md-9">
+					<div id="chatwindow">Chatwindow</div>
 				</div>
 				<div class="col-md-3">
 					<aside class="users">
