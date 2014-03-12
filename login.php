@@ -16,7 +16,7 @@
 		
 		$result = mysql_query ("SELECT * FROM users WHERE username = '$username'");
 		
-		if (mysql_num_rows() == 0) {
+		if (mysql_num_rows($result) == 0) {
 			$errors[] = "Der angegebene Benutzer ist nicht vorhanden!";
 		}
 		
