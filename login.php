@@ -4,10 +4,10 @@
 	
 	$errors = array();
 	
-	if (!isset($_POST['username'])
+	if (!isset($_POST['username']))
 		$errors[] = "Sie müssen einen Usernamen eingeben!";
 		
-	if (!isset($_POST['password'])
+	if (!isset($_POST['password']))
 		$errors[] = "Sie müssen ein Passwort eingeben!";
 	
 	if (count($errors) == 0) {
