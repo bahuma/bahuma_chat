@@ -38,7 +38,7 @@ function createNewEntry($user, $content, $room) {
 		print('{status: 0, message: "'.mysql_error().'"}');
 	}
 	else {
-		print('{status: 0}');
+		print('{status: 1}');
 	}
 }
 
