@@ -18,10 +18,6 @@ if (!isset($_SESSION['user'])) {
 		<link rel="stylesheet" href="libs/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="css/style.css">
 		
-		<script>
-			var USER = <?php print $_SESSION['user'] ?>
-		</script>
-		
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="js/chat.js"></script>
