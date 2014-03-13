@@ -47,8 +47,12 @@ function getOnlineUsers() {
 }
 
 function checkKick() {
-	jQuery.getJSON("chatcontroller.php?action=checkKick&user="+ USER +"&room=default", function (data) {
+	console.log("check");
+	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default&user=1", function (data) {
+		console.log("ready");
+		console.log("data: " + data);
 		if (data.status == 1) {
+			console.log("kick");
 			document.location("logout.php?action=kick");
 		}
 	});
@@ -70,7 +74,7 @@ jQuery(document).ready(function ($) {
 	getOnlineUsers();
 	setInterval("getOnlineUsers()", 10000);
 	
-	setInterval("ckeckKick()", 50000);
+	setInterval("checkKick()", 5000);
 	
   	jQuery('#chatform').on('submit', function(e){
     	e.preventDefault();
