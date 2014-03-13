@@ -1,5 +1,7 @@
 <?php
 	include ("database.php");
+	include ("functions.php");
+	
 	session_start();	
 	
 	$errors = array();
@@ -39,7 +41,7 @@
 		if (count ($errors) == 0) {
 			$password = md5($password);
 			
-			$query = "INSERT INTO users (name, password, displayname, color) VALUES ('$username', '$password', '$displayname', '$color')";
+			$query = "INSERT INTO users (name, password, displayname, color, admin) VALUES ('$username', '$password', '$displayname', '$color', false)";
 			
 			$result = mysql_query($query);
 
@@ -47,7 +49,7 @@
 				$errors[] = "Fehler beim schreiben in die Datenbank: ".mysql_error();
 			
 			if (count ($errors) == 0) {
-				$_SESSION['user'] = mysql_insert_id();
+				chatLogin(mysql_insert_id());
 			}			
 		}
 	}
