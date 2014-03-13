@@ -96,6 +96,9 @@ function checkKick($user, $room) {
 	$result = mysql_query($query) or die (mysql_error());
 	
 	if (mysql_num_rows($result) > 0){
+		$query = "DELETE FROM users_kicked WHERE room='".mysql_real_escape_string($room)."' AND user = '".mysql_real_escape_string($user)."'";
+		$result = mysql_query($query) or die (mysql_error());
+		
 		print '{status: 1}';
 	}
 	else
