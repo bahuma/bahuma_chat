@@ -18,7 +18,7 @@ function getLatestEntries($latestID, $room) {
 	$messages = array();
 	
 	while($row=mysql_fetch_array($result)) {
-		$query2 = "SELECT uid, name, displayname, color FROM users WHERE uid ='".$row['user']."'";
+		$query2 = "SELECT * FROM users WHERE uid ='".$row['user']."'";
 		$result2 = mysql_query($query2) or die(mysql_error());
 		$user = mysql_fetch_array($result2);
 		
@@ -27,7 +27,6 @@ function getLatestEntries($latestID, $room) {
 			"user" => array(
 				"id" => $user['uid'],
 				"name" => $user['name'],
-				"displayname" => $user['displayname'],
 				"color" => $user['color']
 			),
 			"content" => $row['content'],
@@ -89,7 +88,6 @@ function getOnlineUsers($room) {
 		$json[] = array (
 			"id" => $user['uid'],
 			"name" => $user['name'],
-			"displayname" => $user['displayname'],
 			"color" => $user['color']
 		);
 	}

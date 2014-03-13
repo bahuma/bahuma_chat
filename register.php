@@ -15,9 +15,6 @@
 	if (!isset($_POST['password2']))
 		$errors[] = "Sie müssen das Passwort zweimal eingeben!";
 	
-	if (!isset($_POST['displayname']))
-		$errors[] = "Sie müssen einen Anzeigenamen eingeben!";
-	
 	if (!isset($_POST['color']))
 		$errors[] = "Sie müssen eine Farbe eingeben!";
 	
@@ -29,7 +26,6 @@
 	if (count($errors) == 0) {
 		$username = mysql_real_escape_string($_POST['username']);
 		$password = mysql_real_escape_string($_POST['password']);
-		$displayname = mysql_real_escape_string($_POST['displayname']);
 		$color = mysql_real_escape_string($_POST['color']);
 		
 		$result = mysql_query ("SELECT * FROM users WHERE name = '$username'") or die(mysql_error());
@@ -41,7 +37,7 @@
 		if (count ($errors) == 0) {
 			$password = md5($password);
 			
-			$query = "INSERT INTO users (name, password, displayname, color, admin) VALUES ('$username', '$password', '$displayname', '$color', false)";
+			$query = "INSERT INTO users (name, password, color, admin) VALUES ('$username', '$password', '$color', false)";
 			
 			$result = mysql_query($query);
 

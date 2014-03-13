@@ -13,7 +13,7 @@ function getLatestEntries() {
 	jQuery.getJSON("chatcontroller.php?action=getLatestEntries&latestID="+latestid+"&room=default", function (data) {
 		if (data.messages.length > 0) {
 			jQuery.each(data.messages, function (i, el) {
-				jQuery("#chatwindow").prepend('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ el.user.displayname + '</span>: <span class="content">'+ el.content +'</span></div>');
+				jQuery("#chatwindow").prepend('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ el.user.name + '</span>: <span class="content">'+ el.content +'</span></div>');
 			});
 			latestid = data.latest;
 			
@@ -42,11 +42,11 @@ function getOnlineUsers() {
 			jQuery("#userlist").empty();
 			jQuery.each(data, function (i, el) {
 				if (user.admin) {
-					jQuery("#userlist").append('<li style="color: '+el.color+'"><a onclick="kickUser(\''+el.id+'\')" class="glyphicon glyphicon-minus" style="color: '+el.color+'"></a> '+ el.displayname + '</li>');
+					jQuery("#userlist").append('<li style="color: '+el.color+'"><a onclick="kickUser(\''+el.id+'\')" class="glyphicon glyphicon-minus" style="color: '+el.color+'"></a> '+ el.name + '</li>');
 				}
 				else
 				{
-					jQuery("#userlist").append('<li style="color: '+el.color+'">'+ el.displayname + '</li>');
+					jQuery("#userlist").append('<li style="color: '+el.color+'">'+ el.name + '</li>');
 				}
 			});
 		}
@@ -54,10 +54,7 @@ function getOnlineUsers() {
 }
 
 function checkKick() {
-	console.log("check");
 	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default", function (data) {
-		console.log("ready");
-		console.log(data);
 		if (data.status == 1) {
 			console.log("kick");
 			window.location.href = "logout.php?action=kick";

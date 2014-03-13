@@ -7,7 +7,6 @@ function chatLogin($uid) {
 	$_SESSION['user'] = array(
 		"uid" => $row->uid,
 		"name" => $row->name,
-		"displayname" => $row->displayname,
 		"color" => $row->color,
 		"admin" => $row->admin
 	);

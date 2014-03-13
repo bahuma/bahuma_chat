@@ -21,12 +21,24 @@ if (!isset($_SESSION['user'])) {
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 		<script src="js/chat.js"></script>
+		
+		<script>
+			var user = {
+				uid: <?php print $_SESSION['user']['uid'] ?>,
+				name: "<?php print $_SESSION['user']['name'] ?>",
+				color: "<?php print $_SESSION['user']['color'] ?>",
+				admin: <?php if ($_SESSION['user']['admin']) {print "true";} else {print "false";} ?>
+			}
+		</script>
 	<head>
 	<body>
 		<div class="container">
 			<section id="main" class="row">
 				<div class="col-md-12">
 					<header class="page-header">
+						<ul class="nav nav-pills pull-right">
+							<li><a href="user_edit.php">Settings</a></li>
+						</ul>
 						<h1>Chat</h1>
 					</header>
 				</div>
