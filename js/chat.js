@@ -28,7 +28,8 @@ function getLatestEntries() {
 }
 
 function createNewEntry(content) {
-	jQuery.getJSON("chatcontroller.php?action=createNewEntry&content=" + htmlEncode(content) +"&room=default");
+	if (content != "")
+		jQuery.getJSON("chatcontroller.php?action=createNewEntry&content=" + htmlEncode(content) +"&room=default");
 }
 
 function notifyOnline() {
