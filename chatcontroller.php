@@ -1,9 +1,14 @@
 <?php
+session_start();
 header( "Cache-Control: no-cache, must-revalidate" ); 
 header( "Pragma: no-cache" );
 header("Content-Type: text/json");
 
 include("database.php");
+
+function test() {
+	print_r ($_SESSION);
+}
 
 function getLatestEntries($latestID, $room) {
 	
@@ -110,20 +115,23 @@ function checkKick($user, $room) {
 
 // Aktion festlegen
 switch ($_GET['action']) {
+	case "test" :
+		test();
+	break;
 	case "createNewEntry" :
-		createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
+		createNewEntry($_SESSION['user']['uid'], $_GET['content'], $_GET['room']);
 	break;
 	case "getLatestEntries" :
 		getLatestEntries($_GET['latestID'], $_GET['room']);
 	break;
 	case "notifyOnline" :
-		notifyOnline($_GET['uid'], $_GET['room']);
+		notifyOnline($_SESSION['user']['uid'], $_GET['room']);
 	break;
 	case "getOnlineUsers" :
 		getOnlineUsers($_GET['room']);
 	break;
 	case "checkKick" :
-		checkKick($_GET['user'], $_GET['room']);
+		checkKick($_SESSION['user']['uid'], $_GET['room']);
 	break;
 }
 
