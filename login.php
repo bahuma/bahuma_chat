@@ -1,5 +1,6 @@
 <?php
 	include ("database.php");
+	include ("functions.php");
 	session_start();	
 	
 	$errors = array();
@@ -27,7 +28,7 @@
 				$errors[] = "Das eingegebene Passwort passt nicht zum angegebenen Benutzer!";
 				
 			if (count ($errors) == 0) {
-				$_SESSION['user'] = $row->uid;
+				chatLogin ($row->uid);
 			}			
 		}
 	}
