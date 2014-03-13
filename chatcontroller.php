@@ -136,6 +136,43 @@ function kickAll($room) {
 	}
 }
 
+function checkRefresh($user, $room) {
+	$query = "SELECT * FROM users_refresh WHERE room='".mysql_real_escape_string($room)."' AND user = '".mysql_real_escape_string($user)."'";
+	$result = mysql_query($query) or die (mysql_error());
+	
+	if (mysql_num_rows($result) > 0){
+		$query = "DELETE FROM users_refresh WHERE room='".mysql_real_escape_string($room)."' AND user = '".mysql_real_escape_string($user)."'";
+		$result = mysql_query($query) or die (mysql_error());
+		
+		$json = array("status" => 1);		
+	}
+	else
+	{
+		$json = array("status" => 0);
+	}
+	print json_encode($json);
+}
+
+function refresh($user, $room) {
+	if ($_SESSION['user']['admin']) {
+		$query = "INSERT INTO users_refresh (user, room) VALUES ('".mysql_real_escape_string($user)."', '".mysql_real_escape_string($room)."')";
+		$result = mysql_query($query);
+	}
+}
+
+function refreshAll($room) {
+	if ($_SESSION['user']['admin']) {
+		$requiredtime = time() - 20;
+		$query = "SELECT * FROM users_in_rooms WHERE room='".mysql_real_escape_string($room)."' AND time > '".$requiredtime."'";
+		$result = mysql_query($query) or die (mysql_error());
+		
+		while ($row = mysql_fetch_object($result)) {
+			refresh($row->user, $room);
+		}
+	}
+}
+
+
 // Aktion festlegen
 switch ($_GET['action']) {
 	case "test" :
@@ -161,6 +198,15 @@ switch ($_GET['action']) {
 	break;
 	case "kickAll" :
 		kickAll($_GET['room']);
+	break;
+	case "checkRefresh" :
+		checkRefresh($_SESSION['user']['uid'], $_GET['room']);
+	break;
+	case "refresh" :
+		refresh($_GET['user'], $_GET['room']);
+	break;
+	case "refreshAll" :
+		refreshAll($_GET['room']);
 	break;
 }
 

@@ -46,7 +46,7 @@ function getOnlineUsers() {
 			jQuery("#userlist").empty();
 			jQuery.each(data, function (i, el) {
 				if (user.admin) {
-					jQuery("#userlist").append('<li style="color: '+el.color+'"><a onclick="kickUser(\''+el.id+'\')" class="glyphicon glyphicon-minus" style="color: '+el.color+'"></a> '+ el.name + '</li>');
+					jQuery("#userlist").append('<li style="color: '+el.color+'"><a onclick="kickUser(\''+el.id+'\')" class="glyphicon glyphicon-remove" style="color: '+el.color+'"></a> <a onclick="refreshUser(\''+el.id+'\')" class="glyphicon glyphicon-refresh" style="color: '+el.color+'"></a> '+ el.name + '</li>');
 				}
 				else
 				{
@@ -60,14 +60,26 @@ function getOnlineUsers() {
 function checkKick() {
 	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default", function (data) {
 		if (data.status == 1) {
-			console.log("kick");
 			window.location.href = "logout.php?action=kick";
+		}
+	});
+}
+
+function checkRefresh() {
+	jQuery.getJSON("chatcontroller.php?action=checkRefresh&room=default", function (data) {
+		if (data.status == 1) {
+			console.log("dorefresh");
+			window.location.href = "chat.php";
 		}
 	});
 }
 
 function kickUser(uid) {
 	jQuery.getJSON("chatcontroller.php?action=kick&room=default&user=" + uid);
+}
+
+function refreshUser(uid) {
+	jQuery.getJSON("chatcontroller.php?action=refresh&room=default&user=" + uid);
 }
 
 jQuery(document).ready(function ($) {
@@ -87,6 +99,8 @@ jQuery(document).ready(function ($) {
 	setInterval("getOnlineUsers()", 10000);
 	
 	setInterval("checkKick()", 5000);
+	
+	setInterval("checkRefresh()", 10000);
 	
   	jQuery('#chatform').on('submit', function(e){
     	e.preventDefault();
