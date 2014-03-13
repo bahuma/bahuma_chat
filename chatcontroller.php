@@ -99,12 +99,13 @@ function checkKick($user, $room) {
 		$query = "DELETE FROM users_kicked WHERE room='".mysql_real_escape_string($room)."' AND user = '".mysql_real_escape_string($user)."'";
 		$result = mysql_query($query) or die (mysql_error());
 		
-		print '{status: 1}';
+		$json = array("status" => 1);		
 	}
 	else
 	{
-		print '{status: 0}';
+		$json = array("status" => 0);
 	}
+	print json_encode($json);
 }
 
 // Aktion festlegen
