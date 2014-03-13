@@ -91,6 +91,19 @@ function getOnlineUsers($room) {
 	print json_encode($json);
 }
 
+function checkKick($user, $room) {
+	$query = "SELECT * FROM users_kicked WHERE room='".mysql_real_escape_string($room)."' AND user = '".mysql_real_escape_string($user)."'";
+	$result = mysql_query($query) or die (mysql_error());
+	
+	if (mysql_num_rows($result) > 0){
+		print '{status: 1}';
+	}
+	else
+	{
+		print '{status: 0}';
+	}
+}
+
 // Aktion festlegen
 if ($_GET['action'] == "createNewEntry") { 
 	createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
@@ -103,6 +116,9 @@ elseif ($_GET['action'] == "notifyOnline") {
 }
 elseif ($_GET['action'] == "getOnlineUsers") {
 	getOnlineUsers($_GET['room']);
+}
+elseif ($_GET['action'] == "ckeckKick") {
+	checkKick($_POST['user'], $_POST['room'])
 }
 
 mysql_close();
