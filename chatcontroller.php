@@ -113,6 +113,25 @@ function checkKick($user, $room) {
 	print json_encode($json);
 }
 
+function kick($user, $room) {
+	if ($_SESSION['user']['admin']) {
+		$query = "INSERT INTO users_kicked (user, room) VALUES ('".mysql_real_escape_string($user)."', '".mysql_real_escape_string($room)."')";
+		$result = mysql_query($query);
+	}
+}
+
+function kickAll($room) {
+	if ($_SESSION['user']['admin']) {
+		$requiredtime = time() - 20;
+		$query = "SELECT * FROM users_in_rooms WHERE room='".mysql_real_escape_string($room)."' AND time > '".$requiredtime."'";
+		$result = mysql_query($query) or die (mysql_error());
+		
+		while ($row = mysql_fetch_object($result)) {
+			kick($row->user, $room);
+		}
+	}
+}
+
 // Aktion festlegen
 switch ($_GET['action']) {
 	case "test" :
@@ -132,6 +151,12 @@ switch ($_GET['action']) {
 	break;
 	case "checkKick" :
 		checkKick($_SESSION['user']['uid'], $_GET['room']);
+	break;
+	case "kick" :
+		kick($_GET['user'], $_GET['room']);
+	break;
+	case "kickAll" :
+		kickAll($_GET['room']);
 	break;
 }
 
