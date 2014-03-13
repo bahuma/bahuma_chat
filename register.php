@@ -8,25 +8,33 @@
 	
 	if (!isset($_POST['username']))
 		$errors[] = "Sie müssen einen Usernamen eingeben!";
-		
+	
 	if (!isset($_POST['password']))
 		$errors[] = "Sie müssen ein Passwort eingeben!";
 	
 	if (!isset($_POST['password2']))
 		$errors[] = "Sie müssen das Passwort zweimal eingeben!";
-	
-	if (!isset($_POST['color']))
-		$errors[] = "Sie müssen eine Farbe eingeben!";
-	
+
 	if (count($errors) == 0) {
 		if ($_POST['password'] != $_POST['password2'])
 			$errors[] = "Die angegebenen Passwörter stimmen nicht überein";
 	}
 	
 	if (count($errors) == 0) {
+		if (preg_match('/[^0-9_a-zA-Z]/', $_POST['username']))
+			$errors[] = "Der Benutzername darf nur a-z, A-Z, 0-9 und Unterstriche enthalten!";
+	}
+	
+	if (count($errors) == 0) {
 		$username = mysql_real_escape_string($_POST['username']);
 		$password = mysql_real_escape_string($_POST['password']);
-		$color = mysql_real_escape_string($_POST['color']);
+
+		$colors = array(
+			"ED00CA", "A200ED", "6700ED", "0000ED", "0082ED", "00BD68", "00BDB0", "00BD58",
+			"BD0065", "067A00", "58CC00", "EBAC00", "EB6200", "0089EB"
+		);
+		
+		$color = "#".$colors[rand(0, count($colors) - 1)];
 		
 		$result = mysql_query ("SELECT * FROM users WHERE name = '$username'") or die(mysql_error());
 		
