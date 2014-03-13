@@ -28,11 +28,11 @@ function getLatestEntries() {
 }
 
 function createNewEntry(content) {
-	jQuery.getJSON("chatcontroller.php?action=createNewEntry&content=" + htmlEncode(content) + "&user="+ USER +"&room=default");
+	jQuery.getJSON("chatcontroller.php?action=createNewEntry&content=" + htmlEncode(content) +"&room=default");
 }
 
 function notifyOnline() {
-	jQuery.getJSON("chatcontroller.php?action=notifyOnline&uid="+ USER +"&room=default");
+	jQuery.getJSON("chatcontroller.php?action=notifyOnline&room=default");
 }
 
 function getOnlineUsers() {
@@ -48,7 +48,7 @@ function getOnlineUsers() {
 
 function checkKick() {
 	console.log("check");
-	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default&user=" + USER, function (data) {
+	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default", function (data) {
 		console.log("ready");
 		console.log(data);
 		if (data.status == 1) {
