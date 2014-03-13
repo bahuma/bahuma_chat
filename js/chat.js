@@ -48,12 +48,12 @@ function getOnlineUsers() {
 
 function checkKick() {
 	console.log("check");
-	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default&user=1", function (data) {
+	jQuery.getJSON("chatcontroller.php?action=checkKick&room=default&user=" + USER, function (data) {
 		console.log("ready");
-		console.log("data: " + data);
+		console.log(data);
 		if (data.status == 1) {
 			console.log("kick");
-			document.location("logout.php?action=kick");
+			window.location.href = "logout.php?action=kick";
 		}
 	});
 }
