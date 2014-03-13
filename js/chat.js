@@ -41,7 +41,13 @@ function getOnlineUsers() {
 		if (data.length > 0) {
 			jQuery("#userlist").empty();
 			jQuery.each(data, function (i, el) {
-				jQuery("#userlist").append('<li style="color: '+el.color+'">'+ el.displayname + '</li>');
+				if (user.admin) {
+					jQuery("#userlist").append('<li style="color: '+el.color+'"><a onclick="kickUser(\''+el.id+'\')" class="glyphicon glyphicon-minus" style="color: '+el.color+'"></a> '+ el.displayname + '</li>');
+				}
+				else
+				{
+					jQuery("#userlist").append('<li style="color: '+el.color+'">'+ el.displayname + '</li>');
+				}
 			});
 		}
 	});
@@ -57,6 +63,10 @@ function checkKick() {
 			window.location.href = "logout.php?action=kick";
 		}
 	});
+}
+
+function kickUser(uid) {
+	jQuery.getJSON("chatcontroller.php?action=kick&room=default&user=" + uid);
 }
 
 jQuery(document).ready(function ($) {
