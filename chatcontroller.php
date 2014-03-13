@@ -22,12 +22,18 @@ function getLatestEntries($latestID, $room) {
 		$result2 = mysql_query($query2) or die(mysql_error());
 		$user = mysql_fetch_array($result2);
 		
+		if ($user['admin'])
+			$user_is_admin = true;
+		else
+			$user_is_admin = false;
+		
 		$messages[] = array (
 			"id" => $row['id'],
 			"user" => array(
 				"id" => $user['uid'],
 				"name" => $user['name'],
-				"color" => $user['color']
+				"color" => $user['color'],
+				"admin" => $user_is_admin
 			),
 			"content" => $row['content'],
 			"time" => date("d.m.Y H:i", $row['time'])

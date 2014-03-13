@@ -13,7 +13,11 @@ function getLatestEntries() {
 	jQuery.getJSON("chatcontroller.php?action=getLatestEntries&latestID="+latestid+"&room=default", function (data) {
 		if (data.messages.length > 0) {
 			jQuery.each(data.messages, function (i, el) {
-				jQuery("#chatwindow").prepend('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ el.user.name + '</span>: <span class="content">'+ el.content +'</span></div>');
+				var admintext = "";
+				if (el.user.admin){
+					admintext = "[A] ";
+				}
+				jQuery("#chatwindow").prepend('<div class="message"><span class="time">'+ el.time +'</span> <span class="author" style="color: '+el.user.color+'">'+ admintext + el.user.name + '</span>: <span class="content">'+ el.content +'</span></div>');
 			});
 			latestid = data.latest;
 			
