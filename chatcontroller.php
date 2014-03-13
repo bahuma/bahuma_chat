@@ -108,20 +108,22 @@ function checkKick($user, $room) {
 }
 
 // Aktion festlegen
-if ($_GET['action'] == "createNewEntry") { 
-	createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
-}
-elseif ($_GET['action'] == "getLatestEntries") {
-	getLatestEntries($_GET['latestID'], $_GET['room']);
-}
-elseif ($_GET['action'] == "notifyOnline") {
-	notifyOnline($_GET['uid'], $_GET['room']);
-}
-elseif ($_GET['action'] == "getOnlineUsers") {
-	getOnlineUsers($_GET['room']);
-}
-elseif ($_GET['action'] == "ckeckKick") {
-	checkKick($_POST['user'], $_POST['room'])
+switch ($_GET['action']) {
+	case "createNewEntry" :
+		createNewEntry($_GET['user'], $_GET['content'], $_GET['room']);
+	break;
+	case "getLatestEntries" :
+		getLatestEntries($_GET['latestID'], $_GET['room']);
+	break;
+	case "notifyOnline" :
+		notifyOnline($_GET['uid'], $_GET['room']);
+	break;
+	case "getOnlineUsers" :
+		getOnlineUsers($_GET['room']);
+	break;
+	case "checkKick" :
+		checkKick($_GET['user'], $_GET['room']);
+	break;
 }
 
 mysql_close();
