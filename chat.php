@@ -35,7 +35,7 @@ if (!isset($_SESSION['user'])) {
 						<form class="form-inline" id="chatform">
 							<div class="form-group">
 								<label class="control-label" for="content"></label>
-								<input type="text" class="form-control" id="content" name="content" autocomplete="off" autofocus>
+								<input type="text" class="form-control" id="content" name="content" autocomplete="off" autofocus required>
 							</div>
 							<input type="submit" class="btn btn-default" id="sendenbutton" value="Senden">
 						</form>
