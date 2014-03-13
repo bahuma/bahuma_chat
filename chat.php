@@ -36,9 +36,10 @@ if (!isset($_SESSION['user'])) {
 			<section id="main" class="row">
 				<div class="col-md-12">
 					<header class="page-header">
-						<ul class="nav nav-pills pull-right">
-							<li><a href="user_edit.php">Settings</a></li>
-						</ul>
+						<div class="pull-right">
+							<a href="user_edit.php"><button type="button" class="btn btn-default">Settings</button></a>
+							<a href="logout.php"><button type="button" class="btn btn-default">Logout</button></a>
+						</div>
 						<h1>Chat</h1>
 					</header>
 				</div>

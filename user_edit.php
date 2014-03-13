@@ -25,6 +25,9 @@ $row = mysql_fetch_object($result);
 	<body>
 		<div class="container">
 			<header class="page-header">
+				<div class="pull-right">
+					<a href="chat.php"><button type="button" class="btn btn-default">Zurück</button></a>
+				</div>
 				<h1>Einstellungen</h1>
 			</header>
 			<form class="form-horizontal" action="user_edit_save.php" method="post">
