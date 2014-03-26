@@ -17,7 +17,7 @@ module.exports = function (app, io) {
             callback(true);
             socket.user.nickname = data;
             activeUsers.push(socket.user.nickname);
-            socket.emit('update userlist', userlist);
+            socket.emit('update userlist', activeUsers);
           }
        });
 
@@ -30,5 +30,9 @@ module.exports = function (app, io) {
        socket.on('refresh', function (data) {
            
        });        
+    });
+    
+    io.of('/chat').on('disconnect', function() {
+        console.log("disconnected" + chat.socket.user.nickname);
     });
 }

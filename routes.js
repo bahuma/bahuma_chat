@@ -4,11 +4,7 @@ module.exports = function (app, io){
 		res.render('home');
 	});
 	
-	app.get('/login', function(req, res){
-		res.render('login');
-	});
-	
-	app.get('/chat', function(req, res){
+	app.get('/chat.html', function(req, res){
 		res.render('chat');
 	});
 };
