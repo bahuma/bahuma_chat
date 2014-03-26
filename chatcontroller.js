@@ -15,14 +15,15 @@ module.exports = function (app, io) {
             callback(false);
           else {
             callback(true);
-            activeUsers.push(data);
+            socket.user.nickname = data;
+            activeUsers.push(socket.user.nickname);
             socket.emit('update userlist', userlist);
           }
        });
 
        // Kick
        socket.on('kick', function (data) {
-           
+
        });
        
        // Refresh
