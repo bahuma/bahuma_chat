@@ -1,16 +1,25 @@
+var activeUsers = [];
+
 module.exports = function (app, io) {
     var chat = io.of('/chat').on('connection', function (socket) {
        
        // New Message
-       socket.on('newMessage', function (data) {
-           
+       socket.on('send message', function (data) {
+          socket.broadcast.emit('message');
+          socket.emit('message');
        });
        
-       // New Message
-       socket.on('newMessage', function (data) {
-           
+       // Login
+       socket.on('login', function (data, callback) {
+          if (activeUsers.indexOf(data) != -1)
+            callback(false);
+          else {
+            callback(true);
+            activeUsers.push(data);
+            socket.emit('update userlist', userlist);
+          }
        });
-       
+
        // Kick
        socket.on('kick', function (data) {
            
@@ -19,12 +28,6 @@ module.exports = function (app, io) {
        // Refresh
        socket.on('refresh', function (data) {
            
-       });
-       
-       // Get online users
-       socket.on('getOnlineUsers', function (data) {
-           
-       });
-        
+       });        
     });
 }
