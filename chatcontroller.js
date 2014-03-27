@@ -23,7 +23,7 @@ module.exports = function (app, io) {
           else {
             callback(true);
             socket.user = {'nickname' : data};
-            activeUsers.push(socket.user.nickname);
+            activeUsers.push(socket.user);
             socket.emit('update userlist', activeUsers);
           }
        });
@@ -50,6 +50,8 @@ module.exports = function (app, io) {
     });
     
     io.of('/chat').on('disconnect', function() {
+        array_remove(activeUsers, chat.socket.user);
+        chat.socket.emit('update userlist', activeUsers);
         console.log("disconnected" + chat.socket.user.nickname);
     });
 }

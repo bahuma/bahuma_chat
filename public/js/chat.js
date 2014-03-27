@@ -11,11 +11,6 @@ jQuery(document).ready(function ($) {
     	var username = $('#login input[name="username"]').val();
     	socket.emit('login', username, function(success){
     	    if(success){
-    	        console.log('logged in');
-    	        
-    	        socket.emit('test', username, function(success){
-    	            console.log(success);
-    	        });
     	    }
     	    else
     	        console.log('not logged in');
@@ -25,7 +20,6 @@ jQuery(document).ready(function ($) {
 	// Send messages
     $('#chatform').on('submit', function(e){
     	e.preventDefault();
-    	console.log($('#chatform input[name="content"]').val());
     	socket.emit('send message', $('#chatform input[name="content"]').val());
     	jQuery('#content').val("");
   	});
