@@ -1,12 +1,12 @@
 var activeUsers = [];
 
 module.exports = function (app, io) {
-    var chat = io.of('/chat').on('connection', function (socket) {
+    var chat = io.of('/socket').on('connection', function (socket) {
        
        // New Message
        socket.on('send message', function (data) {
-          socket.broadcast.emit('message');
-          socket.emit('message');
+          socket.broadcast.emit('message', data);
+          socket.emit('message', data);
        });
        
        // Login
