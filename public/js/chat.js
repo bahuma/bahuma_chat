@@ -5,11 +5,28 @@ jQuery(document).ready(function ($) {
 	// Get the socket
 	var socket = io.connect('/socket');
 	
+	// Login
+    $('#login').on('submit', function(e){
+    	e.preventDefault();
+    	var username = $('#login input[name="username"]').val();
+    	socket.emit('login', username, function(success){
+    	    if(success){
+    	        console.log('logged in');
+    	        
+    	        socket.emit('test', username, function(success){
+    	            console.log(success);
+    	        });
+    	    }
+    	    else
+    	        console.log('not logged in');
+    	});
+  	});
+	
 	// Send messages
     $('#chatform').on('submit', function(e){
     	e.preventDefault();
     	console.log($('#chatform input[name="content"]').val());
-    	socket.emit('send message', $('#chatform input[name="content"]').val())
+    	socket.emit('send message', $('#chatform input[name="content"]').val());
     	jQuery('#content').val("");
   	});
   	
@@ -18,7 +35,7 @@ jQuery(document).ready(function ($) {
   	
   	// Handle emits
   	socket.on('message', function (data){
-  	    jQuery("#chatwindow").prepend('<div class="message"><span class="content">'+ data +'</span></div>');
+  	    jQuery("#chatwindow").prepend('<div class="message"><span class="user">' + data.user.nickname + '</span>: <span class="content">'+ data.message +'</span></div>');
   	});
 });
 

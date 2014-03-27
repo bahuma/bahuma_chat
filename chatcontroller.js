@@ -1,12 +1,19 @@
 var activeUsers = [];
 
+function array_remove (array, item) {
+    var i = array.indexOf(item);
+    if(i != -1) {
+        array.splice(i, 1);
+    }
+}
+
 module.exports = function (app, io) {
     var chat = io.of('/socket').on('connection', function (socket) {
        
        // New Message
        socket.on('send message', function (data) {
-          socket.broadcast.emit('message', data);
-          socket.emit('message', data);
+          socket.broadcast.emit('message', {'user' : socket.user, 'message' : data});
+          socket.emit('message',  {'user' : socket.user, 'message' : data});
        });
        
        // Login
@@ -15,10 +22,20 @@ module.exports = function (app, io) {
             callback(false);
           else {
             callback(true);
-            socket.user.nickname = data;
+            socket.user = {'nickname' : data};
             activeUsers.push(socket.user.nickname);
             socket.emit('update userlist', activeUsers);
           }
+       });
+       
+        
+       
+       socket.on('logout', function (data) {
+            array_remove(activeUsers, socket.user);
+       });
+       
+       socket.on('test', function (data, callback) {
+            callback(socket.user);
        });
 
        // Kick
