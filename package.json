@@ -1,0 +1,19 @@
+{
+  "name": "bahuma_chat_node",
+  "version": "0.0.1",
+  "description": "A Simple Chat using sockets",
+  "main": "app.js",
+  "keywords": [
+    "node",
+    "bahuma",
+    "system",
+    "chat"
+  ],
+  "author": "Bahuma",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~3.5.0",
+    "socket.io": "~0.9.16",
+    "ejs": "~0.8.5"
+  }
+}

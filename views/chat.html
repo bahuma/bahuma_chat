@@ -1,16 +1,7 @@
-<?php
-session_start();
-include("database.php");
-
-if (!isset($_SESSION['user'])) {
-	die ("ERROR: NOT LOGGED IN");
-}
-?>
-
 <!doctype html>
 <html>
-	<head>
-		<title>Bahuma Chat</title>
+    <head>
+        <title>Bahuma Chat</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		
@@ -20,20 +11,25 @@ if (!isset($_SESSION['user'])) {
 		
 		<script src="libs/jquery/2.1.0/jquery-2.1.0.min.js"></script>
 		<script src="libs/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-		<script src="js/chat.js"></script>
-		
-		<script>
-			var user = {
-				uid: <?php print $_SESSION['user']['uid'] ?>,
-				name: "<?php print $_SESSION['user']['name'] ?>",
-				color: "<?php print $_SESSION['user']['color'] ?>",
-				admin: <?php if ($_SESSION['user']['admin']) {print "true";} else {print "false";} ?>
-			}
-		</script>
-	<head>
-	<body>
-		<div class="container">
-			<section id="main" class="row">
+    </head>
+    <body>
+        <div class="container">
+            <div id="page_login" class="page">
+                <header class="page-header">
+        			<h1>Login</h1>
+        		</header>
+                <form class="form-horizontal" id="login">
+        			<div class="form-group">
+        				<label for="username" class="col-sm-2 control-label">Username:</label>
+        				<div class="col-sm-10">
+        					<input type="text" name="username" class="form-control">
+        				</div>
+        			</div>
+        			<input type="submit" class="btn btn-default btn-primary btn-sm pull-right" value="Login">
+        		</form>
+        	</div>
+        	<div id="page_login" class="page">
+        		<section id="main" class="row">
 				<div class="col-md-12">
 					<header class="page-header">
 						<div class="pull-right">
@@ -63,6 +59,10 @@ if (!isset($_SESSION['user'])) {
 					</aside>
 				</div>
 			</section>
-		</div>
-	</body>
+        	</div>
+    	</div>
+    	<script src="/socket.io/socket.io.js"></script>
+		<script src="js/chat.js"></script>
+		<script src="js/chat_ui.js"></script>
+    </body>
 </html>
